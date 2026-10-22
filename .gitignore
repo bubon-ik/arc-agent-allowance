@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.vite/
+
+# Foundry
+contracts/out/
+contracts/cache/
+
+# Environment / secrets — NEVER commit
+.env
+.env.*
+!.env.example
+
+# Circle credentials & recovery files
+.circle/
+*recovery*
+*recovery_file*
+
+# OS
+.DS_Store
+Thumbs.db

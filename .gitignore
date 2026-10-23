@@ -23,3 +23,6 @@ contracts/cache/
 # OS
 .DS_Store
 Thumbs.db
+
+# Dev-server console capture log
+console.jsonl

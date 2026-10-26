@@ -98,6 +98,13 @@ const fmt = (raw: bigint | undefined, decimals = USDC_DECIMALS) =>
 
 const fmtAddr = (addr: string) => `${addr.slice(0, 6)}…${addr.slice(-4)}`
 
+// Role addresses (owner / agent) are not shown to visitors of the public demo.
+// A connected wallet that holds the role sees its own address.
+const roleLabel = (addr: string | undefined, isSelf: boolean | '' | undefined) => {
+  if (!addr) return '—'
+  return isSelf ? fmtAddr(addr) : 'Set on-chain'
+}
+
 const fmtDate = (ts: bigint | undefined) => {
   if (ts === undefined) return '—'
   return new Date(Number(ts) * 1000).toLocaleDateString('en-US', {
@@ -719,12 +726,12 @@ export default function App() {
         <div className="grid grid-cols-2 gap-3 text-sm">
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/80">
             <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Owner</p>
-            <p className="font-mono text-slate-700 text-xs break-all">{owner ? fmtAddr(owner) : '—'}</p>
+            <p className="font-mono text-slate-700 text-xs break-all">{roleLabel(owner, isOwner)}</p>
             {isOwner && <span className="text-[10px] text-indigo-600 font-semibold">You</span>}
           </div>
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl px-4 py-3 border border-white/80">
             <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold mb-1">Agent</p>
-            <p className="font-mono text-slate-700 text-xs break-all">{agent ? fmtAddr(agent) : '—'}</p>
+            <p className="font-mono text-slate-700 text-xs break-all">{roleLabel(agent, isAgent)}</p>
             {isAgent && <span className="text-[10px] text-indigo-600 font-semibold">You</span>}
           </div>
         </div>

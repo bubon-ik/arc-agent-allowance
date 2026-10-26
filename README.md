@@ -28,8 +28,8 @@ Limits as read from the contract (`perTxCap`, `dailyCap`, `expiry`).
 | Step | Result |
 |---|---|
 | `USDC.approve(contract, 5 USDC)` by the owner | success, block 27498918, [tx](https://explorer.arc.io/tx/0x6b3000235ef6bd1890d9d23d4a68b9a4f4b821c6ca672b9023c2146893740f10) |
-| `spend(0.10 USDC)` by the agent | success, block 27499264, [tx](https://explorer.arc.io/tx/0xaa121df8a3ccff87f727486bef925d67c163bfa219d455407706aede8b8fdc87) |
-| `spend(2 USDC)` | rejected: `PerTxCapExceeded(2000000, 1000000)` (in simulation, never sent) |
+| `spend(owner, 0.10 USDC)` by the agent, paid back to the owner | success, block 27499264, [tx](https://explorer.arc.io/tx/0xaa121df8a3ccff87f727486bef925d67c163bfa219d455407706aede8b8fdc87) |
+| `spend(owner, 2 USDC)` | rejected: `PerTxCapExceeded(2000000, 1000000)` (in simulation, never sent) |
 
 ## Arc testnet deployment
 

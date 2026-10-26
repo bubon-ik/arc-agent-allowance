@@ -11,6 +11,26 @@ An owner funds an agent with a USDC allowance. The agent can only pay through `s
 
 Anything over a limit reverts with a typed error (`PerTxCapExceeded`, `DailyCapExceeded`, `Expired`, `ContractPaused`, `NotAgent`).
 
+## Arc mainnet deployment
+
+| | |
+|---|---|
+| Contract | [`0x6f8F11347d6bA250986B65cC7A2C2804170b25dc`](https://explorer.arc.io/address/0x6f8F11347d6bA250986B65cC7A2C2804170b25dc) |
+| Token | USDC (`0x3600000000000000000000000000000000000000`) |
+| Per-tx cap | 1 USDC |
+| Daily cap | 5 USDC |
+| Expiry | 2026-11-21 19:32 UTC |
+
+Limits as read from the contract (`perTxCap`, `dailyCap`, `expiry`).
+
+### Mainnet demo run, 23 October 2026
+
+| Step | Result |
+|---|---|
+| `USDC.approve(contract, 5 USDC)` by the owner | success, block 27498918, [tx](https://explorer.arc.io/tx/0x6b3000235ef6bd1890d9d23d4a68b9a4f4b821c6ca672b9023c2146893740f10) |
+| `spend(owner, 0.10 USDC)` by the agent, paid back to the owner | success, block 27499264, [tx](https://explorer.arc.io/tx/0xaa121df8a3ccff87f727486bef925d67c163bfa219d455407706aede8b8fdc87) |
+| `spend(owner, 2 USDC)` | rejected: `PerTxCapExceeded(2000000, 1000000)` (in simulation, never sent) |
+
 ## Arc testnet deployment
 
 | | |
@@ -51,4 +71,4 @@ Demo shop UI lives in `src/App.tsx`; scripts in `scripts/` (deploy, demo run, tx
 
 Secrets (`CIRCLE_API_KEY`, `CIRCLE_ENTITY_SECRET`) are read from a local `.env` and the `.circle/` recovery files; both are gitignored and must never be committed.
 
-Built with [Arc Studio](https://studio.arc.io). Testnet only.
+Built with [Arc Studio](https://studio.arc.io). Deployed on Arc mainnet and Arc testnet (see above).

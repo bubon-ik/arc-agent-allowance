@@ -7,7 +7,7 @@ import {
   useWaitForTransactionReceipt,
   useSwitchChain,
 } from 'wagmi'
-import { arcTestnet } from 'viem/chains'
+import { arc } from 'viem/chains'
 import { erc20Abi, parseUnits, formatUnits } from 'viem'
 import {
   Shield,
@@ -31,10 +31,11 @@ import { toast } from 'sonner'
 import { buildTxExplorerUrl } from '@/onchain-facts'
 
 // ── Contract config ─────────────────────────────────────────────────────────
-const CONTRACT_ADDRESS = '0xc7e39f1c3a6a25375fe5b1eceab4b37ec77ef0b0' as const
+// Arc mainnet deployment (see README "Arc mainnet deployment")
+const CONTRACT_ADDRESS = '0x6f8F11347d6bA250986B65cC7A2C2804170b25dc' as const
 const USDC_ADDRESS = '0x3600000000000000000000000000000000000000' as const
 const USDC_DECIMALS = 6
-const CHAIN_ID = arcTestnet.id
+const CHAIN_ID = arc.id // 5042, Arc mainnet
 
 // SingIt Demo Shop — fixed seller address and catalogue
 const SHOP_SELLER = '0x61D23AB5376BF1f91295FF3C2D841c8516735450' as const
@@ -237,7 +238,7 @@ function ReceiptCard({ receipt, onDismiss }: { receipt: ReceiptItem; onDismiss: 
         className="flex items-center gap-1.5 text-xs text-emerald-600 hover:text-emerald-800 underline underline-offset-2"
       >
         <ExternalLink size={11} />
-        View on Arc Testnet explorer
+        View on Arc explorer
       </a>
     </div>
   )
@@ -330,7 +331,7 @@ function DemoShopPanel({
           <p className="text-[11px] text-slate-400 font-mono">seller {fmtAddr(SHOP_SELLER)}</p>
         </div>
         <span className="ml-auto bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-          Arc Testnet
+          Arc Mainnet
         </span>
       </div>
 
@@ -617,7 +618,7 @@ function ApprovePanel() {
         disabled={isPending || isConfirming || !address}
         className="w-full py-2.5 rounded-xl font-semibold text-sm transition-all bg-teal-600 text-white hover:bg-teal-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {isWrongChain ? 'Switch to Arc Testnet' : isPending ? 'Confirm…' : isConfirming ? 'Confirming…' : 'Approve USDC'}
+        {isWrongChain ? 'Switch to Arc' : isPending ? 'Confirm…' : isConfirming ? 'Confirming…' : 'Approve USDC'}
       </button>
       <TxStatus hash={hash} isPending={isPending} isConfirming={isConfirming} isSuccess={isSuccess} error={error} />
     </div>
@@ -783,13 +784,13 @@ export default function App() {
         {/* Explorer link */}
         <div className="flex justify-center pt-2">
           <a
-            href={`https://explorer.testnet.arc.io/address/${CONTRACT_ADDRESS}`}
+            href={`${arc.blockExplorers.default.url}/address/${CONTRACT_ADDRESS}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-indigo-500 transition-colors"
           >
             <ExternalLink size={11} />
-            View contract on Arc Testnet explorer
+            View contract on Arc explorer
           </a>
         </div>
       </main>

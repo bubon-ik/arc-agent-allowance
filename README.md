@@ -72,3 +72,7 @@ Demo shop UI lives in `src/App.tsx`; scripts in `scripts/` (deploy, demo run, tx
 Secrets (`CIRCLE_API_KEY`, `CIRCLE_ENTITY_SECRET`) are read from a local `.env` and the `.circle/` recovery files; both are gitignored and must never be committed.
 
 Built with [Arc Studio](https://studio.arc.io). Deployed on Arc mainnet and Arc testnet (see above).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
